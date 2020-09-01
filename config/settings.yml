@@ -1,0 +1,26 @@
+plugins:
+  if_adult_max_acceptable:
+    client: false
+    type: enum
+    default: 4
+    enum: "ExplicitContentSetting"
+  if_spoof_max_acceptable:
+    client: false
+    type: enum
+    enum: "ExplicitContentSetting"
+    default: 4
+  if_medical_max_acceptable:
+    client: false
+    type: enum
+    enum: "ExplicitContentSetting"
+    default: 4
+  if_violence_max_acceptable:
+    client: false
+    type: enum
+    enum: "ExplicitContentSetting"
+    default: 4
+  if_racy_max_acceptable:
+    client: false
+    type: enum
+    enum: "ExplicitContentSetting"
+    default: 4
