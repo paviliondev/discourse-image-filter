@@ -1,2 +1,8 @@
 en:
+  site_settings:
+    if_adult_max_acceptable: "Maximum acceptable level for Adult category"
+    if_spoof_max_acceptable: "Maximum acceptable level for Spoof category"
+    if_medical_max_acceptable: "Maximum acceptable level for Medical category"
+    if_violence_max_acceptable: "Maximum acceptable level for Violence category"
+    if_racy_max_acceptable: "Maximum acceptable level for Racy category"
   content_violation_error: "The image doesn't comply with the community standards of %{violations}"
