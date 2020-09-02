@@ -3,12 +3,14 @@
 # version: 0.1
 # authors: fzngagan@gmail.com
 
-gem 'google-protobuf', '3.13.0', platform: 'universal-darwin', require: false
+gem 'os', '1.1.1', require: true
+gem_platform = OS.linux? ? 'x86_64-linux' : OS.mac? ? 'universal-darwin' : ''
+return if gem_platform.empty?
+gem 'google-protobuf', '3.13.0', platform: gem_platform, require: false
 gem 'googleapis-common-protos-types', '1.0.5', require: false
-gem 'grpc', '1.31.1', platform: 'universal-darwin', require: false
+gem 'grpc', '1.31.1', platform: gem_platform, require: false
 gem 'googleapis-common-protos', '1.3.10', require: false
 gem 'signet', '0.14.0', require: false
-gem 'os', '1.1.1', require: false
 gem 'memoist', '0.16.2', require: false
 gem 'googleauth', '0.13.1', require: false
 gem 'rly', '0.2.3', require: false
