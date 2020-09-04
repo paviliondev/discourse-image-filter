@@ -6,4 +6,4 @@ en:
     if_medical_max_acceptable: "Maximum acceptable level for Medical category"
     if_violence_max_acceptable: "Maximum acceptable level for Violence category"
     if_racy_max_acceptable: "Maximum acceptable level for Racy category"
-  content_violation_error: "The image doesn't meet our community standards for %{violations} content"
+  content_violation_error: "The image doesn't meet our community standards for %{violations} content."
