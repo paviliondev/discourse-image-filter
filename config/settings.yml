@@ -1,4 +1,7 @@
 plugins:
+  image_filter_enabled:
+    client: true
+    default: true
   if_adult_max_acceptable:
     client: false
     type: enum

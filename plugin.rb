@@ -3,9 +3,11 @@
 # version: 0.1
 # authors: fzngagan@gmail.com
 
+enabled_site_setting :image_filter_enabled
+
 gem 'os', '1.1.1', require: true
 gem_platform = OS.linux? ? 'x86_64-linux' : OS.mac? ? 'universal-darwin' : ''
-return if gem_platform.empty?
+## if the platform is other than linux or mac, this will fail loudly
 gem 'google-protobuf', '3.13.0', platform: gem_platform, require: false
 gem 'googleapis-common-protos-types', '1.0.5', require: false
 gem 'grpc', '1.31.1', platform: gem_platform, require: false
@@ -27,6 +29,8 @@ module ::DiscourseImageFilter
     [v, Google::Cloud::Vision::V1::Likelihood.const_get(v)]
   end.to_h
 
+  LIKELIHOOD_VALUES[:OFF] = 1000
+
   class ImageUploadAnnotator
     def initialize(image_path)
       @image_path = image_path
@@ -42,9 +46,9 @@ module ::DiscourseImageFilter
       violations = Set.new
       response.responses.each do |res|
         safe_search = res.safe_search_annotation
-        likelihood_values = LIKELIHOOD_VALUES
+
         CATEGORIES.each do |category|
-          if(likelihood_values[safe_search.send(category)] > SiteSetting.send("if_#{category}_max_acceptable"))
+          if(LIKELIHOOD_VALUES[safe_search.send(category)] > SiteSetting.send("if_#{category}_max_acceptable"))
             violations << category
           end
         end
