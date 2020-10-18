@@ -63,11 +63,12 @@ load File.expand_path('../app/models/explicit_content_setting.rb', __FILE__)
 
 after_initialize do
   on(:before_upload_creation) do |file, is_image|
-    return if !is_image
-    annotator = ::DiscourseImageFilter::ImageUploadAnnotator.new(file.path)
-    violations = annotator.detect_violations
-    if(violations.present?)
-      raise StandardError.new(I18n.t('content_violation_error', violations: violations.to_a*", "))
+    if is_image
+      annotator = ::DiscourseImageFilter::ImageUploadAnnotator.new(file.path)
+      violations = annotator.detect_violations
+      if(violations.present?)
+        raise StandardError.new(I18n.t('content_violation_error', violations: violations.to_a*", "))
+      end
     end
   end
 end
