@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # name: discourse-image-filter
 # about: A plugin to restrict uploading explicit content based on set criteria
 # version: 0.1
@@ -20,7 +21,6 @@ gem 'google-gax', '1.8.1', require: false
 gem 'google-cloud-vision', '0.38.0', require: false
 
 require 'google/cloud/vision/v1'
-
 
 module ::DiscourseImageFilter
   CATEGORIES = ["adult", "spoof", "medical", "violence", "racy"]
@@ -48,7 +48,7 @@ module ::DiscourseImageFilter
         safe_search = res.safe_search_annotation
 
         CATEGORIES.each do |category|
-          if(LIKELIHOOD_VALUES[safe_search.send(category)] > SiteSetting.send("if_#{category}_max_acceptable"))
+          if (LIKELIHOOD_VALUES[safe_search.send(category)] > SiteSetting.send("if_#{category}_max_acceptable"))
             violations << category
           end
         end
@@ -66,8 +66,8 @@ after_initialize do
     if is_image
       annotator = ::DiscourseImageFilter::ImageUploadAnnotator.new(file.path)
       violations = annotator.detect_violations
-      if(violations.present?)
-        raise StandardError.new(I18n.t('content_violation_error', violations: violations.to_a*", "))
+      if (violations.present?)
+        raise StandardError.new(I18n.t('content_violation_error', violations: violations.to_a * ", "))
       end
     end
   end
